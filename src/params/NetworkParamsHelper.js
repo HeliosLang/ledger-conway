@@ -34,6 +34,16 @@ export class NetworkParamsHelper extends BabbageNetworkParamsHelper {
     }
 
     /**
+     * @param {bigint} refScriptsSize
+     * @returns {bigint}
+     */
+    calcMaxConwayTxFee(refScriptsSize) {
+        const f = this.maxTxFee
+
+        return f + refScriptsSize * BigInt(this.refScriptsFeePerByte)
+    }
+
+    /**
      * @type {number}
      */
     get refScriptsFeePerByte() {

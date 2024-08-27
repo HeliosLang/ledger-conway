@@ -19,7 +19,7 @@ export {
     TxRedeemer,
     TxWitnesses
 } from "@helios-lang/ledger-babbage"
-export { Tx } from "./Tx.js"
+export { Tx, calcRefScriptsSize } from "./Tx.js"
 
 /**
  * @typedef {import("@helios-lang/ledger-babbage").AddressLike} AddressLike

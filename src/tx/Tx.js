@@ -1,4 +1,4 @@
-import { Tx as BabbageTx } from "@helios-lang/ledger-babbage"
+import { Tx as BabbageTx, TxInput } from "@helios-lang/ledger-babbage"
 import { NetworkParamsHelper } from "../params/index.js"
 
 /**
@@ -33,22 +33,32 @@ export class Tx extends BabbageTx {
 
         const exFee = this.witnesses.calcExFee(params)
 
-        // TODO: add refScript fee
-        const refScriptSize = this.body.inputs
-            .concat(this.body.refInputs ?? [])
-            .reduce((prev, txInput) => {
-                if (txInput.output.refScript) {
-                    return (
-                        prev + BigInt(txInput.output.refScript.toCbor().length)
-                    )
-                } else {
-                    return prev
-                }
-            }, 0n)
-
+        const refScriptSize = calcRefScriptsSize(
+            this.body.inputs,
+            this.body.refInputs
+        )
         const refScriptsFee =
             BigInt(helper.refScriptsFeePerByte) * BigInt(refScriptSize)
 
         return sizeFee + exFee + refScriptsFee
     }
+}
+
+/**
+ * @param {TxInput[]} inputs
+ * @param {Option<TxInput[]>} refInputs
+ * @returns {bigint} - number of cbor bytes
+ */
+export function calcRefScriptsSize(inputs, refInputs) {
+    const refScriptSize = inputs
+        .concat(refInputs ?? [])
+        .reduce((prev, txInput) => {
+            if (txInput.output.refScript) {
+                return prev + BigInt(txInput.output.refScript.toCbor().length)
+            } else {
+                return prev
+            }
+        }, 0n)
+
+    return refScriptSize
 }
