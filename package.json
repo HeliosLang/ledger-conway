@@ -1,0 +1,54 @@
+{
+    "name": "@helios-lang/ledger-conway",
+    "version": "0.1.0",
+    "description": "Cardano ledger types for Conway era",
+    "type": "module",
+    "main": "src/index.js",
+    "scripts": {
+        "build": "npm run prettify && npm run build:types && npm run test:suite",
+        "build:types": "npx tsc -p jsconfig.json --noEmit false --emitDeclarationOnly",
+        "prettify": "npx prettier . --write",
+        "test": "npm run test:pretty && npm run test:types && npm run test:suite",
+        "test:pretty": "npx prettier . --check",
+        "test:suite": "node --test  --experimental-test-coverage",
+        "test:types": "npm run build:types"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HeliosLang/ledger-conway.git"
+    },
+    "keywords": [
+        "Cardano",
+        "blockchain",
+        "ledger",
+        "smart",
+        "contracts"
+    ],
+    "author": "Christian Schmitz",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url": "https://github.com/HeliosLang/ledger-conway/issues"
+    },
+    "homepage": "https://github.com/HeliosLang/ledger-conway#readme",
+    "prettier": {
+        "trailingComma": "none",
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": false
+    },
+    "devDependencies": {
+        "@types/node": "^22.5.0",
+        "prettier": "^3.3.3",
+        "typescript": "^5.5.4"
+    },
+    "dependencies": {
+        "@helios-lang/cbor": "^0.1.21",
+        "@helios-lang/codec-utils": "^0.1.33",
+        "@helios-lang/crypto": "^0.1.14",
+        "@helios-lang/ledger-alonzo": "^0.1.2",
+        "@helios-lang/ledger-babbage": "^0.2.3",
+        "@helios-lang/ledger-shelley": "^0.1.2",
+        "@helios-lang/type-utils": "^0.1.21",
+        "@helios-lang/uplc": "^0.2.0"
+    }
+}
