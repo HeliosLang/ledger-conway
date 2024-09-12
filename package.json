@@ -1,6 +1,6 @@
 {
     "name": "@helios-lang/ledger-conway",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "description": "Cardano ledger types for Conway era",
     "type": "module",
     "main": "src/index.js",
