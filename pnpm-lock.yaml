@@ -20,8 +20,8 @@ importers:
                 specifier: ^0.1.6
                 version: 0.1.6
             "@helios-lang/ledger-babbage":
-                specifier: ^0.3.9
-                version: 0.3.9
+                specifier: ^0.3.10
+                version: 0.3.10
             "@helios-lang/ledger-shelley":
                 specifier: ^0.1.5
                 version: 0.1.5
@@ -85,10 +85,10 @@ packages:
                 integrity: sha512-iTu5uiFR2iEwN3LiM8ewarMEkvmyLSaf1zAFBHetxxmrZs3W7Tn0W5qpx8XjIaKwX7k5r+5Y4TqvIiiuAxIf8Q==
             }
 
-    "@helios-lang/ledger-babbage@0.3.9":
+    "@helios-lang/ledger-babbage@0.3.10":
         resolution:
             {
-                integrity: sha512-GC/T/hcENroRiXaw0MD++8pnegwAiMzCukFOqQHN16hlFA2qe5pnmNES3desjv2mReuQbRd/cIyQDKDZMEEOiQ==
+                integrity: sha512-a5Bfw2LRwLxOXrstYqg6WIDtNYAXBoM5dwFeQLWKBJpk0a9RuWHvCA8BgDnKxRI8ateO51yKtV8rcE09dIZiBg==
             }
 
     "@helios-lang/ledger-shelley@0.1.5":
@@ -167,7 +167,7 @@ snapshots:
 
     "@helios-lang/ledger-alonzo@0.1.6": {}
 
-    "@helios-lang/ledger-babbage@0.3.9":
+    "@helios-lang/ledger-babbage@0.3.10":
         dependencies:
             "@helios-lang/cbor": 0.2.1
             "@helios-lang/codec-utils": 0.2.1
