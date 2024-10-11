@@ -2,7 +2,7 @@ import { Tx as BabbageTx, TxInput } from "@helios-lang/ledger-babbage"
 import { NetworkParamsHelper } from "../params/index.js"
 
 /**
- * @typedef {import("@helios-lang/codec-utils").ByteArrayLike} ByteArrayLike
+ * @typedef {import("@helios-lang/codec-utils").BytesLike} BytesLike
  * @typedef {import("@helios-lang/uplc").UplcData} UplcData
  * @typedef {import("../params/index.js").NetworkParams} NetworkParams
  */
@@ -10,7 +10,7 @@ import { NetworkParamsHelper } from "../params/index.js"
 export class Tx extends BabbageTx {
     /**
      * Deserialize a CBOR encoded Cardano transaction (input is either an array of bytes, or a hex string).
-     * @param {ByteArrayLike} bytes
+     * @param {BytesLike} bytes
      * @returns {Tx}
      */
     static fromCbor(bytes) {
