@@ -33,32 +33,74 @@ export class Tx extends BabbageTx {
 
         const exFee = this.witnesses.calcExFee(params)
 
-        const refScriptSize = calcRefScriptsSize(
+        const refScriptsSize = calcRefScriptsSize(
             this.body.inputs,
             this.body.refInputs
         )
-        const refScriptsFee =
-            BigInt(helper.refScriptsFeePerByte) * BigInt(refScriptSize)
+        const refScriptsFee = calcRefScriptsFee(
+            refScriptsSize,
+            helper.refScriptsFeePerByte
+        )
 
         return sizeFee + exFee + refScriptsFee
     }
 }
 
 /**
+ * @param {bigint} size
+ * @param {number} feePerByte
+ * @param {bigint} growthIncrement
+ * @param {number} growthFactor
+ * @returns {bigint} - a lovelace value
+ */
+export function calcRefScriptsFee(
+    size,
+    feePerByte,
+    growthIncrement = 25600n,
+    growthFactor = 1.2
+) {
+    let multiplier = 1.0
+    let fee = 0n
+
+    while (size > growthIncrement) {
+        fee += BigInt(
+            Math.floor(Number(growthIncrement) * multiplier * feePerByte)
+        )
+        size -= growthIncrement
+        multiplier *= growthFactor
+    }
+
+    fee += BigInt(Math.floor(Number(size) * multiplier * feePerByte))
+
+    return fee
+}
+
+/**
+ * Calculates the total size of reference scripts in unique inputs
  * @param {TxInput[]} inputs
  * @param {Option<TxInput[]>} refInputs
  * @returns {bigint} - number of cbor bytes
  */
 export function calcRefScriptsSize(inputs, refInputs) {
-    const refScriptSize = inputs
-        .concat(refInputs ?? [])
-        .reduce((prev, txInput) => {
+    /**
+     * @type {Record<string, TxInput>}
+     */
+    const uniqueInputs = {}
+
+    inputs.concat(refInputs ?? []).forEach((input) => {
+        uniqueInputs[input.id.toString()] = input
+    })
+
+    const refScriptSize = Object.values(uniqueInputs).reduce(
+        (prev, txInput) => {
             if (txInput.output.refScript) {
                 return prev + BigInt(txInput.output.refScript.toCbor().length)
             } else {
                 return prev
             }
-        }, 0n)
+        },
+        0n
+    )
 
     return refScriptSize
 }
