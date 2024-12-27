@@ -11,7 +11,7 @@ import {
 /**
  * @typedef {BabbageNetworkParams & {
  *   costModelParamsV3: number[]
- *   refScriptFeePerByte: number
+ *   refScriptsFeePerByte: number
  * }} NetworkParams
  */
 
@@ -30,7 +30,7 @@ export function DEFAULT_NETWORK_PARAMS() {
         maxTxExCpu: 10000000000,
         maxTxExMem: 14000000,
         maxTxSize: 16384,
-        refScriptFeePerByte: 15,
+        refScriptsFeePerByte: 15,
         refTipSlot: 113163674,
         refTipTime: 1704729965000,
         secondsPerSlot: 1,

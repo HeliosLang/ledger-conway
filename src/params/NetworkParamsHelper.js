@@ -48,8 +48,8 @@ export class NetworkParamsHelper extends BabbageNetworkParamsHelper {
      */
     get refScriptsFeePerByte() {
         const f = expectSome(
-            this.params?.refScriptFeePerByte,
-            "'networkParams.refScriptFeePerByte' undefined"
+            this.params?.refScriptsFeePerByte,
+            "'networkParams.refScriptsFeePerByte' undefined"
         )
 
         return f
